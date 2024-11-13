@@ -1,4 +1,5 @@
 # 💤 LazyVim
 
-A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
-Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/akunbeben/neovim/refs/heads/main/preview.png" />
+</p>

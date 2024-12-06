@@ -4,3 +4,8 @@
 vim.api.nvim_set_keymap("n", "<C-w>", ":bp|bd #<CR>", { noremap = true, silent = true })
 vim.opt.scrolloff = 22
 vim.o.termguicolors = true
+vim.g.lazyvim_php_lsp = "intelephense"
+vim.api.nvim_create_autocmd("BufRead", {
+  pattern = "*.blade.php",
+  command = "set filetype=blade",
+})

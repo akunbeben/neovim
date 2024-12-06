@@ -19,6 +19,7 @@ require("lazy").setup({
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins
+    { import = "lazyvim.plugins.extras.lang.go" },
     { import = "plugins" },
   },
   defaults = {
@@ -52,3 +53,14 @@ require("lazy").setup({
     },
   },
 })
+
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+parser_config.blade = {
+  install_info = {
+    url = "https://github.com/EmranMR/tree-sitter-blade",
+    files = { "src/parser.c" },
+    branch = "main",
+  },
+  filetype = "blade", -- The filetype this parser is for
+}

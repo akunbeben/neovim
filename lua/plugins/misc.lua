@@ -40,7 +40,6 @@ return {
       })
     end,
   },
-
   {
     "echasnovski/mini.indentscope",
     version = false, -- wait till new 0.7.0 release to put it back on semver
@@ -157,6 +156,22 @@ return {
           { title = "rustaceanvim" }
         )
       end
+    end,
+  },
+  {
+    "nvim-cmp",
+    dependencies = {
+      "supermaven-inc/supermaven-nvim",
+      build = ":SupermavenUseFree",
+      opts = {},
+    },
+    ---@param opts cmp.ConfigSchema
+    opts = function(_, opts)
+      table.insert(opts.sources, 1, {
+        name = "supermaven",
+        group_index = 1,
+        priority = 100,
+      })
     end,
   },
 }

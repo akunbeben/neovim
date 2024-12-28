@@ -75,11 +75,45 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
     event = "LazyFile",
-    opts = {
-      enabled = false,
-    },
+    opts = function()
+      Snacks.toggle({
+        name = "Indention Guides",
+        get = function()
+          return require("ibl.config").get_config(0).enabled
+        end,
+        set = function(state)
+          require("ibl").setup_buffer(0, { enabled = state })
+        end,
+      }):map("<leader>ug")
+
+      return {
+        indent = {
+          char = "",
+          tab_char = "",
+        },
+        scope = { show_start = false, show_end = false },
+        exclude = {
+          filetypes = {
+            "Trouble",
+            "alpha",
+            "dashboard",
+            "help",
+            "lazy",
+            "mason",
+            "neo-tree",
+            "notify",
+            "snacks_dashboard",
+            "snacks_notif",
+            "snacks_terminal",
+            "snacks_win",
+            "toggleterm",
+            "trouble",
+          },
+        },
+      }
+    end,
+    main = "ibl",
   },
   {
     "nvim-lspconfig",
@@ -179,5 +213,37 @@ return {
         winblend = 0,
       },
     },
+  },
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    opts = {
+      -- configurations go here
+    },
+    config = function()
+      require("barbecue").setup({
+        create_autocmd = false, -- prevent barbecue from updating itself automatically
+      })
+
+      vim.api.nvim_create_autocmd({
+        "WinScrolled", -- or WinResized on NVIM-v0.9 and higher
+        "BufWinEnter",
+        "CursorHold",
+        "InsertLeave",
+
+        -- include this if you have set `show_modified` to `true`
+        -- "BufModifiedSet",
+      }, {
+        group = vim.api.nvim_create_augroup("barbecue.updater", {}),
+        callback = function()
+          require("barbecue.ui").update()
+        end,
+      })
+    end,
   },
 }

@@ -75,6 +75,7 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
     event = "LazyFile",
     opts = {
       enabled = false,
@@ -159,19 +160,24 @@ return {
     end,
   },
   {
-    "nvim-cmp",
-    dependencies = {
-      "supermaven-inc/supermaven-nvim",
-      build = ":SupermavenUseFree",
-      opts = {},
+    "nvim-telescope/telescope.nvim",
+    keys = {
+      -- add a keymap to browse plugin files
+      -- stylua: ignore
+      {
+        "<leader>fp",
+        function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
+        desc = "Find Plugin File",
+      },
     },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      table.insert(opts.sources, 1, {
-        name = "supermaven",
-        group_index = 1,
-        priority = 100,
-      })
-    end,
+    -- change some options
+    opts = {
+      defaults = {
+        layout_strategy = "horizontal",
+        layout_config = { prompt_position = "top" },
+        sorting_strategy = "ascending",
+        winblend = 0,
+      },
+    },
   },
 }

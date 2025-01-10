@@ -9,3 +9,8 @@ vim.api.nvim_create_autocmd("BufRead", {
   pattern = "*.blade.php",
   command = "set filetype=blade",
 })
+
+vim.g.clipboard = {
+  copy = { ["+"] = "wl-copy", ["*"] = "wl-copy" },
+  paste = { ["+"] = "wl-paste --no-newline", ["*"] = "wl-paste --no-newline" },
+}

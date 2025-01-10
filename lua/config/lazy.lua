@@ -64,3 +64,5 @@ parser_config.blade = {
   },
   filetype = "blade", -- The filetype this parser is for
 }
+
+vim.cmd("colorscheme default")

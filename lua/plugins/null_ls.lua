@@ -2,6 +2,7 @@ local null_ls = require("null-ls")
 local format_on_save_group = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
 null_ls.setup({
   sources = {
+    null_ls.builtins.formatting.pint,
     null_ls.builtins.formatting.prettier,
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.diagnostics.eslint_d,

@@ -24,3 +24,12 @@ local notify = pcall(require, "notify")
 vim.lsp.handlers["window/showMessage"] = function(_, result)
   notify(result.message, vim.log.levels.INFO)
 end
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    if vim.bo.filetype ~= "lua" then
+      require("luasnip").unlink_current()
+    end
+  end,
+})

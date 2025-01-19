@@ -1,5 +1,8 @@
 require("mason").setup()
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup({
+  ensure_installed = { "intelephense" },
+})
+
 local lspconfig = require("lspconfig")
 local configs = require("lspconfig/configs")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -28,7 +31,9 @@ lspconfig.intelephense.setup({
     buf_set_keymap("n", "gr", "<Cmd>lua vim.lsp.buf.references()<CR>", opts)
 
     if client.server_capabilities.documentFormattingProvider then
+      vim.api.nvim_clear_autocmds({ group = format_on_save_group, buffer = bufnr })
       vim.api.nvim_create_autocmd("BufWritePre", {
+        group = format_on_save_group,
         buffer = bufnr,
         callback = function()
           vim.lsp.buf.format({ bufnr = bufnr })

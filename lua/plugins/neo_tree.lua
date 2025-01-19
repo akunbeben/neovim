@@ -24,7 +24,10 @@ require("neo-tree").setup({
       },
     },
   },
-  filesystem = { follow_current_file = true, hijack_netrw = true },
+  filesystem = {
+    follow_current_file = { enabled = true },
+    hijack_netrw = true,
+  },
   window = {
     position = "right",
     mappings = {
@@ -46,6 +49,14 @@ require("neo-tree").setup({
         desc = "Open with System Application",
       },
       ["P"] = { "toggle_preview", config = { use_float = false } },
+      ["<BS>"] = function(state)
+        local cwd = vim.fn.getcwd()
+        if state.path == cwd then
+          print("Cannot go up, already at root directory.")
+        else
+          require("neo-tree.sources.filesystem").navigate_up(state)
+        end
+      end,
     },
   },
 })

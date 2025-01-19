@@ -21,3 +21,19 @@ vim.api.nvim_set_keymap("n", "<silent> cv", '"+p', { noremap = true })
 vim.api.nvim_set_keymap("n", "<silent> x", '"_x', { noremap = true })
 
 vim.api.nvim_set_keymap("n", "<C-w>", ":bp|bd #<CR>", { noremap = true, silent = true })
+
+-- Toggleterm
+vim.api.nvim_set_keymap("n", "<leader>tf", "<Cmd>ToggleTerm direction=float<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>tv",
+  "<Cmd>ToggleTerm size=40 direction=vertical<CR>",
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>th",
+  "<Cmd>ToggleTerm size=20 direction=horizontal<CR>",
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap("n", "<leader>tn", "<Cmd>TermExec cmd='bash'<CR>", { noremap = true, silent = true })

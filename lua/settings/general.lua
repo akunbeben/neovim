@@ -11,3 +11,16 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.cmd("colorscheme aura")
 vim.cmd("set nowrap")
+
+vim.cmd([[
+  augroup FileTypeDetection
+    autocmd!
+    autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+  augroup END
+]])
+
+local notify = pcall(require, "notify")
+
+vim.lsp.handlers["window/showMessage"] = function(_, result)
+  notify(result.message, vim.log.levels.INFO)
+end
